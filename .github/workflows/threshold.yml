@@ -27,8 +27,12 @@ jobs:
 
       - name: Install
         run: npm ci
+        
+      - name: Build coverage
+        run: npm test
 
-      - run: |
+      - name: Push new coverage
+        run: |
           npm run updateCoverage
           git config user.name github-actions
           git config user.email github-actions@github.com
