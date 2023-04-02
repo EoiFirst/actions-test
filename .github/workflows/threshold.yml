@@ -1,0 +1,39 @@
+name: Bump test coverage threshold
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [develop]
+
+jobs:
+  bump_coverage:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PUSH_TOKEN }}
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 14.17.0
+
+      - name: Install github
+        run: sudo apt-get install -f --yes git
+
+      - name: Install npm
+        run: npm install -g npm@8.16.0
+
+      - name: Install
+        run: npm ci
+
+      - run: |
+          npm run updateCoverage
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add jest.config.js
+          git commit -m "Test coverage threshold bumped [skip ci]"
+          git push
+
+          
