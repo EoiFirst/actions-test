@@ -3,7 +3,7 @@ name: Bump test coverage threshold
 on:
   pull_request:
     types: [closed]
-    branches: [develop]
+    branches: [main]
 
 jobs:
   bump_coverage:
