@@ -3,7 +3,7 @@ name: Bump test coverage threshold
 on:
   pull_request:
     types: [closed]
-    branches: [develop]
+    branches: [main]
 
 jobs:
   bump_coverage:
@@ -27,8 +27,10 @@ jobs:
 
       - name: Install
         run: npm ci
-
-      - run: |
+        
+      - name: Update coverage
+        run: |
+          npm test
           npm run updateCoverage
           git config user.name github-actions
           git config user.email github-actions@github.com
