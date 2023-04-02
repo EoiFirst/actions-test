@@ -13,6 +13,6 @@
   "scripts": {
     "server": "ts-node index.ts",
     "test": "node ./node_modules/.bin/jest  --coverage --testResultsProcessor='jest-junit'",
-    "updateCoverage": "jest-coverage-thresholds-bumper --silent"
+    "updateCoverage": "jest-coverage-thresholds-bumper"
   }
 }
